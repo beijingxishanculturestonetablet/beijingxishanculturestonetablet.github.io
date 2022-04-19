@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>大夏石马</title>
+        <style type="text/css">
+            * {
+                margin: 0;
+                padding: 0;
+            }
+    
+            html,
+            body {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+                height: 100%;
+            }
+
+            #domId {
+                flex: 1;
+            }
+    
+            #btnAddPolyline {
+                display: none;
+            }
+        </style>
+    </head>
+<body>
+    <div id="domId"></div>
+    <script src="https://static.bimface.com/api/BimfaceSDKLoader/BimfaceSDKLoader@latest-release.js" charset="utf-8"></script>
+    <script>
+        let viewer3D;
+        let app;
+        let viewToken = '7c8a9014f1bb447a8b9f592182d29e3c';
+        let loaderConfig = new BimfaceSDKLoaderConfig();
+            loaderConfig.viewToken = viewToken;
+        BimfaceSDKLoader.load(loaderConfig, successCallback, failureCallback);
+            function successCallback(viewMetaData) {
+                let domShow = document.getElementById('domId');
+                let webAppConfig = new Glodon.Bimface.Application.WebApplication3DConfig();
+                    webAppConfig.domElement = domShow;    
+                app = new Glodon.Bimface.Application.WebApplication3D(webAppConfig);    
+                app.addView(viewToken);
+                viewer3D = app.getViewer();    
+            };
+            
+            function failureCallback(error) {
+                console.log(error);
+            };
+    </script>
+</body>
+</html>
